@@ -5,20 +5,25 @@ from state_machine import State
 
 class CheckSensorsState(State):
     """
-    Tillstånd som hämtar data från sensorerna.
+    Tillstånd som hämtar data från sensorerna. När knappen trycks, byter tillståndet till att cykla genom att visa
+    temperatur, CO2 och fuktighet.
     """
 
     def on_entry(self):
         print("Checking sensor...")
-        time.sleep(3)
-        self.state_machine.handle_event("btn_pressed")
 
     def handle_event(self, event):
         if event == "btn_pressed":
             return DisplayTempState("Temperature Display")
+        elif event == "alarm_triggered":
+            return AlarmState("Alarm")
 
 
 class DisplayTempState(State):
+    """
+    Tillstånd som visar temperaturen. Byter automatiskt till nästa visning efter 3 sekunder.
+    """
+
     def on_entry(self):
         print("Displaying temperature...")
         time.sleep(3)
@@ -30,6 +35,9 @@ class DisplayTempState(State):
 
 
 class DisplayCO2State(State):
+    """
+    Tillstånd som visar CO2-nivån. Byter automatiskt till nästa visning efter 3 sekunder.
+    """
 
     def on_entry(self):
         print("Displaying CO2...")
@@ -42,6 +50,9 @@ class DisplayCO2State(State):
 
 
 class DisplayHumState(State):
+    """
+    Tillstånd som visar luftfuktigheten. Byter automatiskt till sensorkontroll efter 3 sekunder.
+    """
 
     def on_entry(self):
         print("Displaying humidity...")
@@ -50,4 +61,17 @@ class DisplayHumState(State):
 
     def handle_event(self, event):
         if event == "switch_display":
+            return CheckSensorsState("Check Sensors")
+
+
+class AlarmState(State):
+    """
+    Tillstånd som visar ett larmmeddelande. När knappen trycks, byter tillståndet till att kontrollera sensorerna.
+    """
+
+    def on_entry(self):
+        print("ALARM! ALARM!")
+
+    def handle_event(self, event):
+        if event == "btn_pressed":
             return CheckSensorsState("Check Sensors")
