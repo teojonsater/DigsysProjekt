@@ -1,6 +1,10 @@
 import time
 
+from delay import Delay
+from display_controller import DisplayController
+from sensor_data_getter import SensorDataGetter
 from state_machine import State
+from sensor_data_tracker import SensorDataTracker
 
 
 class CheckSensorsState(State):
@@ -10,7 +14,23 @@ class CheckSensorsState(State):
     """
 
     def on_entry(self):
-        print("Checking sensor...")
+        print("Entered Check Sensors State...")
+
+        delay = Delay(self.state_machine)
+
+        while True:
+            print("Checking sensors")
+            SensorDataTracker.current_temperature = SensorDataGetter.get_temperature()
+            SensorDataTracker.current_co2 = SensorDataGetter.get_co2()
+            SensorDataTracker.current_humidity = SensorDataGetter.get_humidity()
+
+            if SensorDataTracker.sensors_within_limits():
+                print("Sensors OK")
+            else:
+                self.state_machine.handle_event("alarm_triggered")
+                break
+
+            delay.aware_delay(5, "D2")
 
     def handle_event(self, event):
         if event == "btn_pressed":
@@ -25,7 +45,11 @@ class DisplayTempState(State):
     """
 
     def on_entry(self):
-        print("Displaying temperature...")
+        print("Entered Temperature Display State...")
+
+        temperature = SensorDataTracker.current_temperature
+        DisplayController.display_temperature(temperature)
+
         time.sleep(3)
         self.state_machine.handle_event("switch_display")
 
@@ -40,7 +64,7 @@ class DisplayCO2State(State):
     """
 
     def on_entry(self):
-        print("Displaying CO2...")
+        print("Entered CO2 Display State...")
         time.sleep(3)
         self.state_machine.handle_event("switch_display")
 
@@ -55,7 +79,7 @@ class DisplayHumState(State):
     """
 
     def on_entry(self):
-        print("Displaying humidity...")
+        print("Entered Humidity Display State...")
         time.sleep(3)
         self.state_machine.handle_event("switch_display")
 

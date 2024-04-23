@@ -4,9 +4,7 @@ from states import CheckSensorsState, DisplayTempState, DisplayCO2State, Display
 
 
 def main():
-    machine = StateMachine(CheckSensorsState("Check Sensors"))
-    time.sleep(1)
-    machine.handle_event("btn_pressed")
+    StateMachine(CheckSensorsState("Check Sensors"))  # Startar statemaskinen med CheckSensorsState som starttillstånd
 
 
 if __name__ == '__main__':
