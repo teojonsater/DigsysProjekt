@@ -20,19 +20,12 @@ class State:
         :param state_machine: Tillståndsmaskinen
         :type state_machine: StateMachine
         """
-        
+
         self.state_machine = state_machine
 
     def on_entry(self):
         """
         Anropas när tillståndet går in
-        """
-
-        pass
-
-    def on_exit(self):
-        """
-        Anropas när tillståndet lämnas
         """
 
         pass
@@ -75,7 +68,6 @@ class StateMachine:
         :type new_state: State
         """
 
-        self.current_state.on_exit()
         self.current_state = new_state
         self.current_state.set_state_machine(self)
         self.current_state.on_entry()
