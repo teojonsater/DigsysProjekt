@@ -1,7 +1,18 @@
+import busio
+import adafruit_sgp30
+import adafruit_ahtx0
+import board
+import time
+
+
 class SensorDataGetter:
     """
     Klass som hanterar interaktion med sensorer. Kan hämta temperatur, CO2-nivå och luftfuktighet.
     """
+
+    i2c_bus = board.I2C()
+    sgp30 = adafruit_sgp30.Adafruit_SGP30(i2c_bus)
+    aht20 = adafruit_ahtx0.AHTx0(i2c_bus)
 
     @staticmethod
     def get_temperature():
@@ -12,8 +23,9 @@ class SensorDataGetter:
         :rtype: int
         """
 
-        # TODO: Implementera temperaturhämtning
-        return 24
+        temp = SensorDataGetter.aht20.temperature
+        # print(temp)
+        return int(temp)
 
     @staticmethod
     def get_co2():
@@ -24,8 +36,9 @@ class SensorDataGetter:
         :rtype: int
         """
 
-        # TODO: Implementera CO2-hämtning
-        return 1000
+        eco2 = SensorDataGetter.sgp30.iaq_measure()[0]
+        # print(eco2)
+        return int(eco2)
 
     @staticmethod
     def get_humidity():
@@ -36,5 +49,6 @@ class SensorDataGetter:
         :rtype: int
         """
 
-        # TODO: Implementera luftfuktighetshämtning
-        return 71
+        hum = SensorDataGetter.aht20.relative_humidity
+        # print(hum)
+        return int(hum)

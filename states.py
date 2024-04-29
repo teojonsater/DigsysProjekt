@@ -28,7 +28,7 @@ class CheckSensorsState(State):
                 self.state_machine.handle_event("alarm_triggered")
                 break
 
-            if Delay.aware_delay(30, "D2"):
+            if Delay.aware_delay(1, "D2"):
                 break  # Hoppa ur loopen om knappen trycks
 
         self.state_machine.handle_event("btn_pressed")
@@ -103,13 +103,10 @@ class AlarmState(State):
     """
 
     def on_entry(self):
-        while True:
-            print("ALARM! Sensors out of limits!")
-            if Delay.aware_delay(1, "D2"):
-                break
-
-        self.state_machine.handle_event("btn_pressed")
+        print("ALARM! Sensors out of limits!")
+        time.sleep(10)
+        self.state_machine.handle_event("return_to_sleep")
 
     def handle_event(self, event):
-        if event == "btn_pressed":
+        if event == "return_to_sleep":
             return CheckSensorsState("Check Sensors")
