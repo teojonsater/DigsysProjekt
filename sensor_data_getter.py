@@ -13,7 +13,7 @@ class SensorDataGetter:
         """
 
         # TODO: Implementera temperaturhämtning
-        return 25
+        return 24
 
     @staticmethod
     def get_co2():
@@ -25,7 +25,7 @@ class SensorDataGetter:
         """
 
         # TODO: Implementera CO2-hämtning
-        return 400
+        return 1000
 
     @staticmethod
     def get_humidity():
@@ -37,4 +37,4 @@ class SensorDataGetter:
         """
 
         # TODO: Implementera luftfuktighetshämtning
-        return 50
+        return 71

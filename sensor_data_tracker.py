@@ -1,3 +1,6 @@
+import time
+
+
 class SensorDataTracker:
     """
     Klass som håller koll på sensorvärdena.
@@ -22,16 +25,28 @@ class SensorDataTracker:
         :rtype: bool
         """
 
-        # TODO: Sätt in riktiga gränsvärden
         tolerable_levels = {
-            "temperature": range(0, 30),
-            "co2": range(0, 30),
-            "humidity": range(0, 30)
+            "temperature": {
+                "winter": range(20, 25),
+                "summer": range(20, 27)
+            },
+            "co2": range(0, 1001),
+            "humidity": range(30, 71)
         }
 
-        if SensorDataTracker.current_temperature not in tolerable_levels["temperature"] or \
-                SensorDataTracker.current_co2 not in tolerable_levels["co2"] or \
-                SensorDataTracker.current_humidity not in tolerable_levels["humidity"]:
-            return False
+        # Sommartid 31 mars till 27 oktober
+        # Vintertid 28 oktober till 30 mars
+        current_time = time.localtime()
+        if (current_time.tm_mon == 3 and current_time.tm_mday == 31
+                or current_time.tm_mon in range(4, 9)
+                or current_time.tm_mon == 10
+                or current_time.tm_mday <= 27):
+            season = "summer"
+        else:
+            season = "winter"
 
+        if (SensorDataTracker.current_temperature not in tolerable_levels["temperature"][season]
+                or SensorDataTracker.current_co2 not in tolerable_levels["co2"]
+                or SensorDataTracker.current_humidity not in tolerable_levels["humidity"]):
+            return False
         return True
