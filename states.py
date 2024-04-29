@@ -28,7 +28,7 @@ class CheckSensorsState(State):
                 self.state_machine.handle_event("alarm_triggered")
                 break
 
-            if Delay.aware_delay(1, "D2"):
+            if Delay.aware_delay(1, "D24"):
                 break  # Hoppa ur loopen om knappen trycks
 
         self.state_machine.handle_event("btn_pressed")

@@ -23,8 +23,8 @@ class Delay:
         :rtype: bool
         """
 
-        button_handler = ButtonHandler(button_pin)
         start_time = time.time()
+        button_handler = ButtonHandler()
 
         while time.time() - start_time < seconds:
             if button_handler.is_pressed():

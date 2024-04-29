@@ -1,13 +1,14 @@
+import board
+import digitalio
+from sensor_data_tracker import SensorDataTracker
+
 class ButtonHandler:
     """
     Klass som hanterar en knapp.
-
-    :param button_pin: Pin på mikrokontrollern som knappen är kopplad till.
-    :type button_pin: string
     """
 
-    def __init__(self, button_pin):
-        self.button_pin = button_pin
+    def __init__(self):
+        pass
 
     def is_pressed(self):
         """
@@ -17,6 +18,7 @@ class ButtonHandler:
         :rtype: bool
         """
 
-        # TODO: Implementera knapptryckningsfunktion
-        pin = self.button_pin
+
+        if SensorDataTracker.btn_pin.value:
+            return True
         return False

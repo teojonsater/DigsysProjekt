@@ -1,5 +1,6 @@
 import time
-
+import board
+import digitalio
 
 class SensorDataTracker:
     """
@@ -16,6 +17,7 @@ class SensorDataTracker:
     current_temperature = 0
     current_co2 = 0
     current_humidity = 0
+    btn_pin = digitalio.DigitalInOut(board.D24)
 
     @staticmethod
     def sensors_within_limits():
