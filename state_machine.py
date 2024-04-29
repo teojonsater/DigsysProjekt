@@ -58,6 +58,12 @@ class StateMachine:
     def __init__(self, initial_state):
         self.current_state = initial_state
         self.current_state.set_state_machine(self)
+
+    def start(self):
+        """
+        Startar tillståndsmaskinen
+        """
+
         self.current_state.on_entry()
 
     def transition_to(self, new_state):

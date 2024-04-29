@@ -12,6 +12,7 @@ class SensorDataGetter:
         :rtype: int
         """
 
+        # TODO: Implementera temperaturhämtning
         return 25
 
     @staticmethod
@@ -23,6 +24,7 @@ class SensorDataGetter:
         :rtype: int
         """
 
+        # TODO: Implementera CO2-hämtning
         return 400
 
     @staticmethod
@@ -34,4 +36,5 @@ class SensorDataGetter:
         :rtype: int
         """
 
+        # TODO: Implementera luftfuktighetshämtning
         return 50

@@ -11,11 +11,12 @@ class ButtonHandler:
 
     def is_pressed(self):
         """
-        Metod som kollar om knappen är nedtryckt.
+        Metod som kollar om knappen är nedtryckt. Returnerar True när knappen har släppts.
 
         :return: True om knappen är nedtryckt, annars False.
         :rtype: bool
         """
 
+        # TODO: Implementera knapptryckningsfunktion
         pin = self.button_pin
         return False

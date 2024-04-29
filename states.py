@@ -16,8 +16,6 @@ class CheckSensorsState(State):
     def on_entry(self):
         print("Entered Check Sensors State...")
 
-        delay = Delay(self.state_machine)
-
         while True:
             print("Checking sensors")
             SensorDataTracker.current_temperature = SensorDataGetter.get_temperature()
@@ -30,7 +28,10 @@ class CheckSensorsState(State):
                 self.state_machine.handle_event("alarm_triggered")
                 break
 
-            delay.aware_delay(5, "D2")
+            if Delay.aware_delay(30, "D2"):
+                break  # Hoppa ur loopen om knappen trycks
+
+        self.state_machine.handle_event("btn_pressed")
 
     def handle_event(self, event):
         if event == "btn_pressed":
@@ -65,6 +66,10 @@ class DisplayCO2State(State):
 
     def on_entry(self):
         print("Entered CO2 Display State...")
+
+        co2 = SensorDataTracker.current_co2
+        DisplayController.display_co2(co2)
+
         time.sleep(3)
         self.state_machine.handle_event("switch_display")
 
@@ -80,6 +85,10 @@ class DisplayHumState(State):
 
     def on_entry(self):
         print("Entered Humidity Display State...")
+
+        humidity = SensorDataTracker.current_humidity
+        DisplayController.display_humidity(humidity)
+
         time.sleep(3)
         self.state_machine.handle_event("switch_display")
 
@@ -94,7 +103,12 @@ class AlarmState(State):
     """
 
     def on_entry(self):
-        print("ALARM! ALARM!")
+        while True:
+            print("ALARM! Sensors out of limits!")
+            if Delay.aware_delay(1, "D2"):
+                break
+
+        self.state_machine.handle_event("btn_pressed")
 
     def handle_event(self, event):
         if event == "btn_pressed":

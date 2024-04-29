@@ -4,7 +4,10 @@ from states import CheckSensorsState, DisplayTempState, DisplayCO2State, Display
 
 
 def main():
-    StateMachine(CheckSensorsState("Check Sensors"))  # Startar statemaskinen med CheckSensorsState som starttillstånd
+    sensor_state_machine = StateMachine(
+        CheckSensorsState("Check Sensors"))  # Initialiserar CheckSensorsState som starttillstånd
+
+    sensor_state_machine.start()
 
 
 if __name__ == '__main__':

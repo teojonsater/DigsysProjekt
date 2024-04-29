@@ -11,6 +11,7 @@ class DisplayController:
         :type temp: int
         """
 
+        # TODO: Visa temperaturen på en skärm
         print("Temperature: " + str(temp) + "°C")
 
     @staticmethod
@@ -21,6 +22,7 @@ class DisplayController:
         :type co2: int
         """
 
+        # TODO: Visa CO2-nivån på en skärm
         print("CO2: " + str(co2) + "ppm")
 
     @staticmethod
@@ -31,4 +33,5 @@ class DisplayController:
         :type hum: int
         """
 
+        # TODO: Visa luftfuktigheten på en skärm
         print("Humidity: " + str(hum) + "%")

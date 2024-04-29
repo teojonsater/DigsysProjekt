@@ -22,15 +22,16 @@ class SensorDataTracker:
         :rtype: bool
         """
 
-        max_levels = {
-            "temperature": 30,
-            "co2": 800,
-            "humidity": 70
+        # TODO: Sätt in riktiga gränsvärden
+        tolerable_levels = {
+            "temperature": range(0, 30),
+            "co2": range(0, 30),
+            "humidity": range(0, 30)
         }
 
-        if (SensorDataTracker.current_temperature > max_levels["temperature"] or SensorDataTracker.current_co2 >
-                max_levels[
-                    "co2"] or SensorDataTracker.current_humidity > max_levels["humidity"]):
+        if SensorDataTracker.current_temperature not in tolerable_levels["temperature"] or \
+                SensorDataTracker.current_co2 not in tolerable_levels["co2"] or \
+                SensorDataTracker.current_humidity not in tolerable_levels["humidity"]:
             return False
 
         return True
