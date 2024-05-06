@@ -1,30 +1,18 @@
-import time
-from state_machine import StateMachine
-from sensor_data_tracker import SensorDataTracker
-from states import CheckSensorsState, DisplayTempState, DisplayCO2State, DisplayHumState
+from time import sleep
+from display_controller import DisplayController
+from sensor_data_getter import SensorDataGetter
 import board
-import digitalio
+import busio
 
 
 def main():
-    SensorDataTracker.btn_pin.direction = digitalio.Direction.INPUT
-
-    sensor_state_machine = StateMachine(
-        CheckSensorsState("Check Sensors"))  # Initialiserar CheckSensorsState som starttillstånd
-
-    sensor_state_machine.start()
-
-def test():
-    btn_pin = digitalio.DigitalInOut(board.D24)
-    btn_pin.direction = digitalio.Direction.INPUT
-
-    btn_is_pressed = False
     while True:
-        if btn_pin.value and not btn_is_pressed:
-            btn_is_pressed = True
-            print("hej")
-        if not btn_pin.value:
-            btn_is_pressed = False
+        DisplayController.display_temperature(SensorDataGetter.get_temperature())
+        sleep(2)
+        DisplayController.display_co2(SensorDataGetter.get_co2())
+        sleep(2)
+        DisplayController.display_humidity(SensorDataGetter.get_humidity())
+        sleep(2)
 
 
 if __name__ == '__main__':

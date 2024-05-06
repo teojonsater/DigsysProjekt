@@ -1,8 +1,6 @@
-import busio
 import adafruit_sgp30
 import adafruit_ahtx0
 import board
-import time
 
 
 class SensorDataGetter:
@@ -24,7 +22,6 @@ class SensorDataGetter:
         """
 
         temp = SensorDataGetter.aht20.temperature
-        # print(temp)
         return int(temp)
 
     @staticmethod
@@ -37,7 +34,6 @@ class SensorDataGetter:
         """
 
         eco2 = SensorDataGetter.sgp30.iaq_measure()[0]
-        # print(eco2)
         return int(eco2)
 
     @staticmethod
@@ -50,5 +46,4 @@ class SensorDataGetter:
         """
 
         hum = SensorDataGetter.aht20.relative_humidity
-        # print(hum)
         return int(hum)

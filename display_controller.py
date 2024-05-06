@@ -1,7 +1,27 @@
+import board
+from adafruit_ht16k33 import segments
+
+
 class DisplayController:
     """
     Klassen DisplayController är en kontroller för att visa information på en skärm.
     """
+
+    @staticmethod
+    def display(text: any):
+        """
+        Visar text på en skärm.
+        :param text: Texten som ska visas.
+        :type text: any
+        """
+
+        i2c = board.I2C()
+        display = segments.Seg14x4(i2c)
+
+        if len(text) > 4:
+            display.marquee(text, 0.3, False)
+        else:
+            display.print(text)
 
     @staticmethod
     def display_temperature(temp):
@@ -11,8 +31,10 @@ class DisplayController:
         :type temp: int
         """
 
-        # TODO: Visa temperaturen på en skärm
-        print("Temperature: " + str(temp) + "°C")
+        i2c = board.I2C()
+        display = segments.Seg14x4(i2c)
+
+        display.marquee("TEMP " + str(temp) + "'C", 0.3, False)
 
     @staticmethod
     def display_co2(co2):
@@ -22,8 +44,10 @@ class DisplayController:
         :type co2: int
         """
 
-        # TODO: Visa CO2-nivån på en skärm
-        print("CO2: " + str(co2) + "ppm")
+        i2c = board.I2C()
+        display = segments.Seg14x4(i2c)
+
+        display.marquee("CO2 ppm " + str(co2) + "", 0.3, False)
 
     @staticmethod
     def display_humidity(hum):
@@ -33,5 +57,7 @@ class DisplayController:
         :type hum: int
         """
 
-        # TODO: Visa luftfuktigheten på en skärm
-        print("Humidity: " + str(hum) + "%")
+        i2c = board.I2C()
+        display = segments.Seg14x4(i2c)
+
+        display.marquee("HUM " + str(hum) + "%", 0.3, False)
