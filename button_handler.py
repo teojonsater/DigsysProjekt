@@ -1,7 +1,5 @@
 import board
 import digitalio
-from sensor_data_tracker import SensorDataTracker
-from time import sleep
 
 
 class ButtonHandler:
@@ -36,11 +34,10 @@ class ButtonHandler:
         :rtype: bool
         """
 
-        try:
-            btn_pin = digitalio.DigitalInOut(ButtonHandler.pin_config[btn_pin])
-            btn_pin.direction = digitalio.Direction.INPUT
-            btn_pin.pull = digitalio.Pull.UP
-        except ValueError:
-            pass
+        btn_pin = digitalio.DigitalInOut(ButtonHandler.pin_config[btn_pin])
+        btn_pin.direction = digitalio.Direction.INPUT
+        btn_pin.pull = digitalio.Pull.UP
 
-        return not btn_pin.value
+        btn_value = not btn_pin.value
+        btn_pin.deinit()
+        return btn_value

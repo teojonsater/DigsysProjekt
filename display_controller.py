@@ -1,3 +1,5 @@
+from time import sleep
+
 import board
 from adafruit_ht16k33 import segments
 
@@ -35,6 +37,8 @@ class DisplayController:
         display = segments.Seg14x4(i2c)
 
         display.marquee("TEMP " + str(temp) + "'C", 0.3, False)
+        sleep(2)
+        display.fill(False)
 
     @staticmethod
     def display_co2(co2):
@@ -47,7 +51,9 @@ class DisplayController:
         i2c = board.I2C()
         display = segments.Seg14x4(i2c)
 
-        display.marquee("CO2 ppm " + str(co2) + "", 0.3, False)
+        display.marquee("CO2 PPM " + str(co2) + "", 0.3, False)
+        sleep(2)
+        display.fill(False)
 
     @staticmethod
     def display_humidity(hum):
@@ -61,3 +67,5 @@ class DisplayController:
         display = segments.Seg14x4(i2c)
 
         display.marquee("HUM " + str(hum) + "%", 0.3, False)
+        sleep(2)
+        display.fill(False)
