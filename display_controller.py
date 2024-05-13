@@ -22,7 +22,7 @@ class DisplayController:
         display = segments.Seg14x4(i2c)
 
         if len(text) > 4:
-            display.marquee(text, GlobalConstants.DisplaySpeed, False)
+            display.marquee(text, GlobalConstants.SCROLL_SPEED, False)
         else:
             display.print(text)
 
@@ -37,8 +37,8 @@ class DisplayController:
         i2c = board.I2C()
         display = segments.Seg14x4(i2c)
 
-        display.marquee("TEMP " + str(temp) + "'C", GlobalConstants.DisplaySpeed, False)
-        sleep(GlobalConstants.DisplayDelay)
+        display.marquee("TEMP " + str(temp) + "'C", GlobalConstants.SCROLL_SPEED, False)
+        sleep(GlobalConstants.DISPLAY_DELAY)
         display.fill(False)
 
     @staticmethod
@@ -52,8 +52,8 @@ class DisplayController:
         i2c = board.I2C()
         display = segments.Seg14x4(i2c)
 
-        display.marquee("CO2 PPM " + str(co2) + "", GlobalConstants.DisplaySpeed, False)
-        sleep(GlobalConstants.DisplayDelay)
+        display.marquee("CO2 PPM " + str(co2) + "", GlobalConstants.SCROLL_SPEED, False)
+        sleep(GlobalConstants.DISPLAY_DELAY)
         display.fill(False)
 
     @staticmethod
@@ -67,6 +67,6 @@ class DisplayController:
         i2c = board.I2C()
         display = segments.Seg14x4(i2c)
 
-        display.marquee("HUM " + str(hum) + "%", GlobalConstants.DisplaySpeed, False)
-        sleep(GlobalConstants.DisplayDelay)
+        display.marquee("HUM " + str(hum) + "%", GlobalConstants.SCROLL_SPEED, False)
+        sleep(GlobalConstants.DISPLAY_DELAY)
         display.fill(False)

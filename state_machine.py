@@ -24,7 +24,7 @@ class StateMachine:
                 SensorDataTracker.current_humidity = SensorDataGetter.get_humidity()
                 SensorDataTracker.current_co2 = SensorDataGetter.get_co2()
 
-                if Delay.aware_delay(GlobalConstants.SleepUpdateInterval, GlobalConstants.ButtonPin):
+                if Delay.aware_delay(GlobalConstants.SLEEP_UPDATE_INTERVAL, GlobalConstants.BUTTON_PIN):
                     self.current_state = "display_temperature"
 
             elif self.current_state == "display_temperature":
