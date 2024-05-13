@@ -2,7 +2,7 @@
 $files = Get-ChildItem -Path . -Filter *.py
 
 # Destination directory
-$destination = "D:\"
+$destination = "I:\"
 
 # Remove all py files from the destination
 Get-ChildItem -Path $destination -Filter *.py | Remove-Item

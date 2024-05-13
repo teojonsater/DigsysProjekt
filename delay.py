@@ -1,5 +1,7 @@
 import time
 
+from button_handler import ButtonHandler
+
 
 class Delay:
     """
@@ -24,8 +26,7 @@ class Delay:
         start_time = time.time()
 
         while time.time() - start_time < seconds:
-            pass
-            # if button_handler.is_pressed():
-            # return True
+            if ButtonHandler.is_pressed(button_pin):
+                return True
         else:
             return False
