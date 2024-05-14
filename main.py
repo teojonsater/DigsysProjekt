@@ -1,5 +1,6 @@
 import time
-
+import digitalio
+from global_constants import GlobalConstants
 from sensor_data_getter import SensorDataGetter
 from state_machine import StateMachine
 
@@ -10,9 +11,7 @@ def main():
 
 
 def test_main():
-    while True:
-        print(SensorDataGetter.get_co2())
-        time.sleep(0.5)
+    pass
 
 
 if __name__ == '__main__':

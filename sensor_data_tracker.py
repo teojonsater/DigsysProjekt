@@ -21,8 +21,8 @@ class SensorDataTracker:
     def sensors_within_limits():
         """
         Kontrollerar om sensorvärdena är inom acceptabla gränser.
-        :return: True om alla sensorvärden är inom acceptabla gränser, annars False.
-        :rtype: bool
+        :return: Lista på om sensorvärdena är inom acceptabla gränser. Listans ordning är [temperatur, co2, luftfuktighet]
+        :rtype: list[bool]
         """
 
         tolerable_levels = {
@@ -45,8 +45,8 @@ class SensorDataTracker:
         else:
             season = "winter"
 
-        if (SensorDataTracker.current_temperature not in tolerable_levels["temperature"][season]
-                or SensorDataTracker.current_co2 not in tolerable_levels["co2"]
-                or SensorDataTracker.current_humidity not in tolerable_levels["humidity"]):
-            return False
-        return True
+        return [
+            SensorDataTracker.current_temperature not in tolerable_levels["temperature"][season],
+            SensorDataTracker.current_co2 not in tolerable_levels["co2"],
+            SensorDataTracker.current_humidity not in tolerable_levels["humidity"]
+        ]
