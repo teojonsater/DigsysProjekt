@@ -19,7 +19,15 @@ class GlobalConstants:
         "D12": board.D12,
         "D13": board.D13
     }
-    BUTTON_PIN = "A1"  # Vilken pin knappen är kopplad till.
-    RED_LED_PIN = "D11"  # Vilken pin den röda lysdioden är kopplad till.
-    GREEN_LED_PIN = "D12"  # Vilken pin den gröna lysdioden är kopplad till.
-    YELLOW_LED_PIN = "D13"  # Vilken pin den gula lysdioden är kopplad till.
+    BUTTON_PIN = "A1"
+    RED_LED_PIN = "D11"
+    GREEN_LED_PIN = "D12"
+    YELLOW_LED_PIN = "D13"
+    TOLERABLE_SENSOR_LEVELS = {
+        "TEMPERATURE": {
+            "WINTER": range(20, 25),
+            "SUMMER": range(20, 27)
+        },
+        "CO2": range(0, 1001),
+        "HUMIDITY": range(30, 71)
+    }

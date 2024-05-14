@@ -1,4 +1,5 @@
 from display_controller import DisplayController
+from fan_handler import FanHandler
 from global_constants import GlobalConstants
 from lights_handler import LightsHandler
 from sensor_data_getter import SensorDataGetter
@@ -28,7 +29,8 @@ class StateMachine:
                 SensorDataTracker.current_co2 = SensorDataGetter.get_co2()
 
                 # Triggering alarms if the values are above the threshold
-                LightsHandler.lights_on(SensorDataTracker.sensors_within_limits())
+                LightsHandler.lights_on(SensorDataTracker.sensors_not_within_limits())
+                FanHandler.fan_on(SensorDataTracker.sensors_not_within_limits())
 
                 # If the button is pressed, the state machine should go to display_temperature state
                 if Delay.aware_delay(GlobalConstants.SLEEP_UPDATE_INTERVAL, GlobalConstants.BUTTON_PIN):
