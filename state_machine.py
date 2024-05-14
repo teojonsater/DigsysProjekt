@@ -8,6 +8,8 @@ from delay import Delay
 class StateMachine:
     """
     Klass som hanterar maskinens olika tillstånd.
+    :ivar current_state: Aktuellt tillstånd
+    :type current_state: string
     """
 
     def __init__(self):
@@ -25,6 +27,9 @@ class StateMachine:
                 SensorDataTracker.current_co2 = SensorDataGetter.get_co2()
 
                 if Delay.aware_delay(GlobalConstants.SLEEP_UPDATE_INTERVAL, GlobalConstants.BUTTON_PIN):
+                    SensorDataTracker.current_temperature = SensorDataGetter.get_temperature()
+                    SensorDataTracker.current_humidity = SensorDataGetter.get_humidity()
+                    SensorDataTracker.current_co2 = SensorDataGetter.get_co2()
                     self.current_state = "display_temperature"
 
             elif self.current_state == "display_temperature":
