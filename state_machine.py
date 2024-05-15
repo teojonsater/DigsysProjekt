@@ -1,8 +1,8 @@
 from display_controller import DisplayController
-from fan_handler import FanHandler
+from fan_controller import FanHandler
 from global_constants import GlobalConstants
-from lights_handler import LightsHandler
-from sensor_data_getter import SensorDataGetter
+from lights_controller import LightsHandler
+from sensors_controller import SensorsController
 from sensor_data_tracker import SensorDataTracker
 from delay import Delay
 
@@ -24,9 +24,9 @@ class StateMachine:
         while True:
             if self.current_state == "sensor_update":
                 print("Updating sensor data")
-                SensorDataTracker.current_temperature = SensorDataGetter.get_temperature()
-                SensorDataTracker.current_humidity = SensorDataGetter.get_humidity()
-                SensorDataTracker.current_co2 = SensorDataGetter.get_co2()
+                SensorDataTracker.current_temperature = SensorsController.get_temperature()
+                SensorDataTracker.current_humidity = SensorsController.get_humidity()
+                SensorDataTracker.current_co2 = SensorsController.get_co2()
 
                 # Triggering alarms if the values are above the threshold
                 LightsHandler.lights_on(SensorDataTracker.sensors_not_within_limits())
@@ -34,9 +34,13 @@ class StateMachine:
 
                 # If the button is pressed, the state machine should go to display_temperature state
                 if Delay.aware_delay(GlobalConstants.SLEEP_UPDATE_INTERVAL, GlobalConstants.BUTTON_PIN):
-                    SensorDataTracker.current_temperature = SensorDataGetter.get_temperature()
-                    SensorDataTracker.current_humidity = SensorDataGetter.get_humidity()
-                    SensorDataTracker.current_co2 = SensorDataGetter.get_co2()
+                    SensorDataTracker.current_temperature = SensorsController.get_temperature()
+                    SensorDataTracker.current_humidity = SensorsController.get_humidity()
+                    SensorDataTracker.current_co2 = SensorsController.get_co2()
+
+                    # Triggering alarms if the values are above the threshold
+                    LightsHandler.lights_on(SensorDataTracker.sensors_not_within_limits())
+                    FanHandler.fan_on(SensorDataTracker.sensors_not_within_limits())
                     self.current_state = "display_temperature"
 
             elif self.current_state == "display_temperature":

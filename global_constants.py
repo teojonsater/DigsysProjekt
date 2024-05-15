@@ -1,8 +1,9 @@
 import board
+import pwmio
 
 
 class GlobalConstants:
-    SLEEP_UPDATE_INTERVAL = 3  # (sekunder) Hur ofta sensordata ska uppdateras.
+    SLEEP_UPDATE_INTERVAL = 20  # (sekunder) Hur ofta sensordata ska uppdateras.
     SCROLL_SPEED = 0.3  # (sekunder) Hur snabbt texten ska scrolla, dvs hur lång tid mellan varje tecken.
     DISPLAY_DELAY = 1  # (sekunder) Hur lång tid texten ska visas innan den går vidare till nästa.
     PIN_CONFIGS = {
@@ -31,3 +32,4 @@ class GlobalConstants:
         "CO2": range(0, 1001),
         "HUMIDITY": range(30, 71)
     }
+    FAN_PWM = pwmio.PWMOut(PIN_CONFIGS["D5"], frequency=100)

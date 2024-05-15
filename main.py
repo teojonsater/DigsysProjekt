@@ -1,7 +1,3 @@
-import time
-import digitalio
-from global_constants import GlobalConstants
-from sensor_data_getter import SensorDataGetter
 from state_machine import StateMachine
 
 

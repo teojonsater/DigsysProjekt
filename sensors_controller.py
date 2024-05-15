@@ -3,7 +3,7 @@ import adafruit_ahtx0
 import board
 
 
-class SensorDataGetter:
+class SensorsController:
     """
     Klass som hanterar interaktion med sensorer. Kan hämta temperatur, CO2-nivå och luftfuktighet.
     """
@@ -20,7 +20,7 @@ class SensorDataGetter:
         :rtype: int
         """
 
-        temp = SensorDataGetter.aht20.temperature
+        temp = SensorsController.aht20.temperature
         return int(temp)
 
     @staticmethod
@@ -32,7 +32,7 @@ class SensorDataGetter:
         :rtype: int
         """
 
-        eco2 = SensorDataGetter.sgp30.eCO2
+        eco2 = SensorsController.sgp30.eCO2
         return int(eco2)
 
     @staticmethod
@@ -44,5 +44,5 @@ class SensorDataGetter:
         :rtype: int
         """
 
-        hum = SensorDataGetter.aht20.relative_humidity
+        hum = SensorsController.aht20.relative_humidity
         return int(hum)

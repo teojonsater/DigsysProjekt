@@ -1,6 +1,6 @@
 import time
 
-from button_handler import ButtonHandler
+from button_controller import ButtonHandler
 
 
 class Delay:
