@@ -1,16 +1,18 @@
 import time
-import pwmio
-
 from global_constants import GlobalConstants
 
 
-class FanHandler:
+class FanController:
+    """
+    Klass som hanterar den påkopplade fläkten.
+    """
+
     @staticmethod
     def fan_on(fan_levels):
         """
         Metod som sätter fläkten på en viss nivå.
 
-        :param fan_levels: En array av boolska värden som anger vilka fläktnivåer som ska vara på.
+        :param fan_levels: En array av booleska värden som anger vilka fläktnivåer som ska vara på.
         :type fan_levels: list[bool]
         """
 

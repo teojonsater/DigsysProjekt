@@ -35,7 +35,7 @@ visar upp de avlästa värdena på en 14-segments display.
 Om de avlästa värdena avviker från våra bestämda gränsvärden så kommer en av tre lysdioder att lysa upp. En grön lysdiod
 kommer att lysa om co2-värdet är avvikande, en gul lysdiod kommer att lysa om luftfuktigheten är avvikande och en
 röd lysdiod kommer att lysa om temperaturen är avvikande. Beroende på hur många avvikelser som finns så kommer en
-påkopplad fläkt att starta i variernade hastigheter.
+påkopplad fläkt att starta i varierande hastigheter.
 
 ## Installation
 

@@ -1,6 +1,8 @@
 import time
-
+from fan_controller import FanController
 from global_constants import GlobalConstants
+from lights_controller import LightsController
+from sensors_controller import SensorsController
 
 
 class SensorDataTracker:
@@ -43,3 +45,17 @@ class SensorDataTracker:
             SensorDataTracker.current_co2 not in GlobalConstants.TOLERABLE_SENSOR_LEVELS["CO2"],
             SensorDataTracker.current_humidity not in GlobalConstants.TOLERABLE_SENSOR_LEVELS["HUMIDITY"]
         ]
+
+    @staticmethod
+    def update_sensor_values():
+        """
+        Metod som hämtar sensorvärdena och startar säkerhetsåtgärder om sensorvärdena är utanför gränsvärdena.
+        """
+
+        SensorDataTracker.current_temperature = SensorsController.get_temperature()
+        SensorDataTracker.current_humidity = SensorsController.get_humidity()
+        SensorDataTracker.current_co2 = SensorsController.get_co2()
+
+        # Startar säkerhetsåtgärder om sensorvärdena är utanför gränsvärdena
+        LightsController.lights_on(SensorDataTracker.sensors_not_within_limits())
+        FanController.fan_on(SensorDataTracker.sensors_not_within_limits())

@@ -6,6 +6,11 @@ import board
 class SensorsController:
     """
     Klass som hanterar interaktion med sensorer. Kan hämta temperatur, CO2-nivå och luftfuktighet.
+
+    :cvar aht20: AHT20-sensor objekt.
+    :type aht20: adafruit_ahtx0.AHTx0
+    :cvar sgp30: SGP30-sensor objekt.
+    :type sgp30: adafruit_sgp30.Adafruit_SGP30
     """
 
     aht20 = adafruit_ahtx0.AHTx0(board.I2C())

@@ -1,14 +1,28 @@
 from state_machine import StateMachine
 
 
-def main():
-    machine = StateMachine()
-    machine.run()
+class Main:
+    """
+    Main-class som kör programmet.
+    """
 
+    @staticmethod
+    def main():
+        """
+        Main-metod som skapar en instans av StateMachine och kör programmet.
+        """
 
-def test_main():
-    pass
+        machine = StateMachine()
+        machine.run()
+
+    @staticmethod
+    def test_main():
+        """
+        Testfunktion som används för att testa nya funktioner innan de implementeras i main.
+        """
+
+        pass
 
 
 if __name__ == '__main__':
-    main()
+    Main.main()

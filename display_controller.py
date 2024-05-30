@@ -1,7 +1,6 @@
 import board
 from time import sleep
 from adafruit_ht16k33 import segments
-
 from global_constants import GlobalConstants
 
 

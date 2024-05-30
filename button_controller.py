@@ -1,9 +1,8 @@
 import digitalio
-
 from global_constants import GlobalConstants
 
 
-class ButtonHandler:
+class ButtonController:
     """
     Klass som kan hantera en knapp.
     """
